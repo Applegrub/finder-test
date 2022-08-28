@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, FormControlLabel, Radio, RadioGroup } from '@mui/material';
+import {Box, FormControlLabel, Radio, RadioGroup} from '@mui/material';
 import ListWithPagination from 'components/ListWithPagination';
 import { CategoryRequestEnum } from 'utils/constants';
 import { useDebounce } from 'utils/useDebounce';
@@ -63,7 +63,7 @@ const Main: React.FC = () => {
           </RadioGroup>
         </Box>
       </Box>
-      <ListWithPagination category={category} />
+        <ListWithPagination category={category} />
     </Box>
   );
 };

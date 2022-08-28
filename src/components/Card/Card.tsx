@@ -18,7 +18,7 @@ interface Props {
 
 const Card: React.FC<Props> = ({ character: { name }, id, category }) => {
   return (
-    <MuiCard sx={{ minWidth: 275 }}>
+    <MuiCard sx={{ minWidth: 200, width: 1/4, height: 1  }}>
       <CardContent>
         <Typography variant='h5' component='div'>
           {name}
