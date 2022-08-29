@@ -14,16 +14,18 @@ const CategoriesBar: React.FC = () => {
   return (
     <Box py={2} display='flex' justifyContent='center'>
       <RadioGroup row value={category} onChange={handleCategoryChange}>
-        <FormControlLabel
-          value={CategoryRequestEnum.people}
-          control={<Radio />}
-          label={CategoryRequestEnum.people}
-        />
-        <FormControlLabel
-          value={CategoryRequestEnum.planets}
-          control={<Radio />}
-          label={CategoryRequestEnum.planets}
-        />
+        {(
+          Object.keys(CategoryRequestEnum) as Array<
+            keyof typeof CategoryRequestEnum
+          >
+        ).map((category) => (
+          <FormControlLabel
+            key={category}
+            value={category}
+            control={<Radio />}
+            label={category}
+          />
+        ))}
       </RadioGroup>
     </Box>
   );
