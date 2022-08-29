@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, CircularProgress, Grid } from '@mui/material';
 import { CategoryRequestEnum } from 'utils/constants';
 import Card from 'components/Card';
-import { InfoResponse } from 'services/ResponseTypes';
-import { getInfoRequest } from 'services/getInfoRequest';
+import { useGetInfoQuery } from 'services/apiService/infoApi';
 
 interface Props {
   initPage?: number;
@@ -11,22 +10,12 @@ interface Props {
 }
 
 const Pagination: React.FC<Props> = ({ initPage = 1, category }) => {
-  const [isLoading, setIsLoading] = useState(true);
   const [hasPagination, setHasPagination] = useState(false);
-  const [info, setInfo] = useState<InfoResponse | undefined>();
-  const [maxPageCount, setMaxPageCount] = useState(0);
+  const { data, isLoading } = useGetInfoQuery({ category, page: initPage });
+  const maxPageCount = Math.ceil(Number(data?.count) / 10);
 
   useEffect(() => {
     setHasPagination(false);
-    getInfoRequest({
-      category,
-      initPage,
-      onComplete: (res) => {
-        setMaxPageCount(Math.ceil(Number(res.count) / 10));
-        setInfo(res);
-        setIsLoading(false);
-      },
-    });
   }, [category]);
 
   if (isLoading) {
@@ -39,7 +28,7 @@ const Pagination: React.FC<Props> = ({ initPage = 1, category }) => {
 
   return (
     <>
-      {info?.results.map((item, index) => (
+      {data?.results.map((item, index) => (
         <Grid item xs key={item.name}>
           <Card category={category} character={item} id={index + 1} />
         </Grid>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { styled } from '@mui/material/styles';
 import {
   Box,
@@ -13,8 +13,7 @@ import {
 } from '@mui/material';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getPersonalInfoRequest } from 'services/getPersonalInfoRequest';
-import { CharacterInfo, PlanetInfo } from 'services/ResponseTypes';
+import { useGetPersonalInfoQuery } from 'services/apiService/infoApi';
 import { CategoryRequestEnum } from 'utils/constants';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -36,26 +35,20 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const PersonalInfo: React.FC = () => {
-  const [personalInfo, setPersonalInfo] = useState<
-    CharacterInfo | PlanetInfo | undefined
-  >();
-  const [isLoading, setIsLoading] = useState(true);
+type Params = {
+  category: CategoryRequestEnum;
+  id: string;
+};
 
+const PersonalInfo: React.FC = () => {
   const { category, id } = useParams();
+  const { data: personalInfo, isLoading } = useGetPersonalInfoQuery({
+    category,
+    id,
+  } as Params);
+
   const navigate = useNavigate();
   const handleGoBack = () => navigate('/');
-
-  useEffect(() => {
-    getPersonalInfoRequest({
-      category: category as CategoryRequestEnum,
-      id: id as string,
-      onComplete: (res) => {
-        setPersonalInfo(res);
-        setIsLoading(false);
-      },
-    });
-  }, []);
 
   if (isLoading) {
     return (

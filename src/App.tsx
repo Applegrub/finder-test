@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
-import Main from './pages/Main';
+import InfoList from './pages/InfoList';
 import PersonalInfo from './pages/PersonalInfo';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route index element={<Main />} />
+          <Route index element={<InfoList />} />
           <Route path='/:category/:id' element={<PersonalInfo />} />
         </Route>
       </Routes>
