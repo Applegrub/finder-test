@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
-import { infoApi } from 'services/apiService/infoApi';
+import { Provider } from 'react-redux';
+import { store } from 'store/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <ApiProvider api={infoApi}>
+  <Provider store={store}>
     <App />
-  </ApiProvider>
+  </Provider>
 );

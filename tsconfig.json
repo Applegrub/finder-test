@@ -20,7 +20,7 @@
       "pages/*": ["pages/*"],
       "services/*": ["services/*"],
       "utils/*": ["utils/*"],
-      "asserts/*": ["asserts/*"]
+      "store/*": ["store/*"]
     }
   },
   "include": ["src"]

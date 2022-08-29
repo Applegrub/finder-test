@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { CategoryRequestEnum } from 'utils/constants';
 import { CharacterInfo, PlanetInfo } from 'services/ResponseTypes';
 import { useDebounce } from 'utils/useDebounce';
 import { getInfoRequest } from 'services/getInfoRequest';
 import Autocomplete from 'components/Autocomplete';
+import { useAppSelector } from 'store/hooks';
+import { selectorCategory } from 'store/categorySlice';
 
-interface Props {
-  category: CategoryRequestEnum;
-}
+const SearchBar: React.FC = () => {
+  const category = useAppSelector(selectorCategory);
 
-const SearchBar: React.FC<Props> = ({ category }) => {
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState<
     Array<CharacterInfo | PlanetInfo> | undefined

@@ -1,16 +1,17 @@
 import React from 'react';
-import {Grid} from '@mui/material';
-import {CategoryRequestEnum} from 'utils/constants';
-import Pagination from "./Pagination";
+import { Grid } from '@mui/material';
+import Pagination from './Pagination';
+import { useAppSelector } from 'store/hooks';
+import { selectorCategory } from 'store/categorySlice';
 
-interface Props {
-  category: CategoryRequestEnum;
-}
+const ListWithPagination: React.FC = () => {
+  const category = useAppSelector(selectorCategory);
 
-const ListWithPagination: React.FC<Props> = ({ category }) => (
+  return (
     <Grid mb={3} container spacing={2}>
       <Pagination category={category} />
     </Grid>
-    )
+  );
+};
 
 export default ListWithPagination;
