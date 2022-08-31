@@ -20,7 +20,13 @@ const Pagination: React.FC<Props> = ({ initPage = 1, category }) => {
 
   if (isLoading) {
     return (
-      <Grid container item justifyContent='center' alignItems='center' xs={10}>
+      <Grid
+        container
+        item
+        justifyContent='center'
+        alignItems='center'
+        width={1}
+      >
         <CircularProgress />
       </Grid>
     );
